@@ -25,9 +25,17 @@
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+body::before {   /* the sepia map of the realms, fixed behind the page */
+  content: ""; position: fixed; inset: 0; z-index: -1;
+  background: #3a2c1a url("img/wallpaper.jpg") center / cover no-repeat;
+}
+body::after {   /* a soft vignette so the panels stand off the map */
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(12, 16, 34, 0.10) 40%, rgba(12, 16, 34, 0.55) 100%);
+}
 body {
   margin: 0;
-  background: var(--night);
+  background: #3a2c1a;
   color: var(--ink);
   font-family: "Pixelify Sans", "Trebuchet MS", Verdana, sans-serif;
   font-size: 18px;
@@ -43,9 +51,9 @@ img { max-width: 100%; height: auto; display: block; }
 
 .hero { position: relative; }
 .hero img { width: 100%; }
-.hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 30%; background: linear-gradient(transparent, var(--night)); pointer-events: none; }
+.hero { border-bottom: 3px solid var(--brass-dim); }
 
-.pitch { text-align: center; padding: 1.5rem 0 3rem; }
+.pitch { text-align: center; padding: 2rem 2rem 2.5rem; margin-top: 2rem; }
 .pitch .kicker { color: var(--ink-dim); letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 0.6rem; }
 .pitch h1 { font-size: clamp(2rem, 5vw, 3.2rem); }
 .pitch p { max-width: 46rem; margin-left: auto; margin-right: auto; font-size: 1.15rem; }
@@ -58,7 +66,12 @@ img { max-width: 100%; height: auto; display: block; }
 .button:hover, .button:focus-visible { background: #f2ca76; }
 .platforms { color: var(--ink-dim); font-size: 0.95rem; margin-top: 0.9rem; }
 
-section { padding: 3rem 0; border-top: 1px solid var(--panel-edge); }
+section { padding: 1rem 0; }
+.pitch, section > .wrap, footer > .wrap {   /* each part of the page is a dark panel laid on the map */
+  background: rgba(12, 16, 34, 0.95); border: 2px solid var(--brass-dim); border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+section > .wrap { padding: 2.2rem 2rem 2.4rem; }
 .lead { max-width: 46rem; color: var(--ink-dim); }
 
 .shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 1.2rem; margin-top: 1.5rem; }
@@ -92,7 +105,8 @@ figure img.keep { aspect-ratio: auto; }
 .download .lead { margin: 0 auto 1rem; }
 .note { color: var(--ink-dim); font-size: 0.95rem; max-width: 40rem; margin: 1.2rem auto 0; }
 
-footer { border-top: 1px solid var(--panel-edge); padding: 2rem 0 3rem; color: var(--ink-dim); font-size: 0.9rem; }
+footer { padding: 1rem 0 3rem; color: var(--ink-dim); font-size: 0.9rem; }
+footer > .wrap { padding: 1.4rem 2rem; }
 footer p { margin-bottom: 0.5em; }
 </style>
 </head>
