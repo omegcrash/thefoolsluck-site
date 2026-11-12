@@ -78,6 +78,7 @@ section > .wrap { padding: 2.2rem 2rem 2.4rem; }
 figure { margin: 0; background: var(--panel); border: 2px solid var(--panel-edge); border-radius: 8px; overflow: hidden; }
 figure img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
 figure.wide { grid-column: 1 / -1; }
+figure video { width: 100%; height: auto; display: block; }
 figure.wide img { aspect-ratio: auto; }
 figcaption { padding: 0.7rem 1rem 0.9rem; font-size: 0.95rem; color: var(--ink-dim); }
 figcaption strong { color: var(--ink); font-weight: normal; }
@@ -300,6 +301,19 @@ footer p { margin-bottom: 0.5em; }
     </div>
   </section>
 
+  <section id="map">
+    <div class="wrap">
+      <h2>The road between chapters</h2>
+      <p class="lead">Between battles you travel living maps, one for each stretch of the journey. The falls run, the storm turns over Stormspire and the Empire's patrols move when you do. Make camp, hunt, dig at the old aqueduct, fish under the falls, or find the Carved Door beside them.</p>
+      <div class="shots">
+        <figure class="wide">
+          <video class="keep" src="video/map_stormspire.mp4" poster="img/map_stormspire_poster.jpg" width="1280" height="704" autoplay loop muted playsinline preload="metadata" aria-label="The first overworld map, moving: waterfalls pour from the mountains, a storm spins over the towers of Stormspire, ships ride at anchor off the coast."></video>
+          <figcaption><strong>The Stormspire coast.</strong> The first of six maps, each with its own weather, seasons, towns and secrets.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
   <section>
     <div class="wrap">
       <h2>How it plays</h2>
@@ -338,6 +352,9 @@ footer p { margin-bottom: 0.5em; }
   var button = document.getElementById("music");
   var theme = document.getElementById("theme");
   theme.volume = 0.6;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {   // no moving map for those who ask for stillness: it waits on its still, with controls
+    document.querySelectorAll("video").forEach(function (v) { v.removeAttribute("autoplay"); v.pause(); v.controls = true; });
+  }
   button.addEventListener("click", function () {
     if (theme.paused) {
       theme.play();
