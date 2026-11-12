@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dual Realms: The Journey of the Fool's Luck</title>
+<meta name="description" content="Dual Realms is a strategy role-playing game of music and magic, based on the Dual Worlds book saga. Book One: The Journey of the Fool's Luck. Now in alpha for Windows, macOS and Linux.">
+<meta property="og:title" content="Dual Realms: The Journey of the Fool's Luck">
+<meta property="og:description" content="A strategy role-playing game of music and magic, based on the Dual Worlds book saga. Now in alpha.">
+<meta property="og:image" content="https://www.thefoolsluck.com/img/hero.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.png">
+<style>
+@font-face { font-family: "Alagard"; src: url("fonts/alagard.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Pixelify Sans"; src: url("fonts/PixelifySans.ttf") format("truetype"); font-display: swap; }
+:root {
+  --night: #0c1022;
+  --panel: #151a33;
+  --panel-edge: #2a3158;
+  --brass: #e2b55a;
+  --brass-dim: #9c7a36;
+  --ink: #f1ead8;
+  --ink-dim: #b3b0c4;
+  --teal: #5fd6c8;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--night);
+  color: var(--ink);
+  font-family: "Pixelify Sans", "Trebuchet MS", Verdana, sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+}
+h1, h2, h3 { font-family: "Alagard", Georgia, serif; font-weight: normal; color: var(--brass); line-height: 1.15; margin: 0 0 0.5em; }
+h2 { font-size: 2.2rem; }
+h3 { font-size: 1.35rem; margin-bottom: 0.3em; }
+p { margin: 0 0 1em; }
+a { color: var(--teal); }
+.wrap { width: min(1100px, 92vw); margin: 0 auto; }
+img { max-width: 100%; height: auto; display: block; }
+
+.hero { position: relative; }
+.hero img { width: 100%; }
+.hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 30%; background: linear-gradient(transparent, var(--night)); pointer-events: none; }
+
+.pitch { text-align: center; padding: 1.5rem 0 3rem; }
+.pitch .kicker { color: var(--ink-dim); letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 0.6rem; }
+.pitch h1 { font-size: clamp(2rem, 5vw, 3.2rem); }
+.pitch p { max-width: 46rem; margin-left: auto; margin-right: auto; font-size: 1.15rem; }
+.button {
+  display: inline-block; margin-top: 0.8rem; padding: 0.75rem 1.8rem;
+  font-family: "Alagard", Georgia, serif; font-size: 1.4rem; text-decoration: none;
+  color: #1a1305; background: var(--brass); border: 2px solid #fff1c7; border-radius: 6px;
+  box-shadow: 0 4px 0 var(--brass-dim);
+}
+.button:hover, .button:focus-visible { background: #f2ca76; }
+.platforms { color: var(--ink-dim); font-size: 0.95rem; margin-top: 0.9rem; }
+
+section { padding: 3rem 0; border-top: 1px solid var(--panel-edge); }
+.lead { max-width: 46rem; color: var(--ink-dim); }
+
+.shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 1.2rem; margin-top: 1.5rem; }
+figure { margin: 0; background: var(--panel); border: 2px solid var(--panel-edge); border-radius: 8px; overflow: hidden; }
+figure img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+figure.wide { grid-column: 1 / -1; }
+figure.wide img { aspect-ratio: auto; }
+figcaption { padding: 0.7rem 1rem 0.9rem; font-size: 0.95rem; color: var(--ink-dim); }
+figcaption strong { color: var(--ink); font-weight: normal; }
+
+.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.2rem; margin-top: 1.5rem; }
+.card { background: var(--panel); border: 2px solid var(--panel-edge); border-radius: 8px; padding: 1.2rem 1.3rem; }
+.card p { margin: 0; color: var(--ink-dim); font-size: 1rem; }
+
+.masters { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-end; gap: 0.5rem 1.2rem; background: var(--panel); border: 2px solid var(--panel-edge); border-radius: 8px; padding: 1.2rem 1rem; margin-top: 1.5rem; }
+.masters img { height: 200px; width: auto; }
+
+.gallery { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.6rem 1.4rem; background: var(--panel); border: 2px solid var(--panel-edge); border-radius: 8px; padding: 1.4rem 1rem; margin-top: 1.5rem; }
+.gallery img { width: auto; height: 130px; image-rendering: pixelated; }
+.gallery.whales img.big { height: 210px; image-rendering: auto; }
+.gallery.ships img { height: 170px; image-rendering: auto; }
+h3.sub { margin-top: 2.2rem; font-size: 1.6rem; }
+figure img.keep { aspect-ratio: auto; }
+
+.download { text-align: center; }
+.download .lead { margin: 0 auto 1rem; }
+.note { color: var(--ink-dim); font-size: 0.95rem; max-width: 40rem; margin: 1.2rem auto 0; }
+
+footer { border-top: 1px solid var(--panel-edge); padding: 2rem 0 3rem; color: var(--ink-dim); font-size: 0.9rem; }
+footer p { margin-bottom: 0.5em; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img src="img/hero.jpg" width="1919" height="1055" alt="Dual Realms: A Journey of the Fool's Luck. The silver ship Fool's Luck under full sail on open sea, a golden-haired figurehead at her prow, the title in gold across her sails.">
+</header>
+
+<main>
+  <div class="wrap pitch">
+    <div class="kicker">Book One · The Journey of the Fool's Luck</div>
+    <h1>A strategy role-playing game where magic is sung</h1>
+    <p>Nika and Scott Valorian can hear what the Empire has spent centuries silencing. With the crew of the airship Fool's Luck they run from Emperor Helios's fleet across two realms, under skies where whales fly. Based on the Dual Worlds book saga.</p>
+    <a class="button" href="#download">Play the alpha</a>
+    <div class="platforms">Windows · macOS · Linux</div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <h2>Battles are sung, not swung</h2>
+      <p class="lead">Give each fighter their orders, then watch the fight play out: flame serpents, shields of sound, songs that silence a whole line.</p>
+      <div class="shots">
+        <figure class="wide">
+          <img src="img/battle_helios.jpg" width="1600" height="900" alt="A battle at night on a harbor wall under Stormspire's towers in the rain: Nika, Scott and Erica Valorian face Emperor Helios in red and gold armour as flame serpents cross the field.">
+          <figcaption><strong>Stormspire Falls.</strong> The Valorians against Emperor Helios himself, his Flame Serpent loose on both lines.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/battle_beach.jpg" width="1600" height="900" loading="lazy" alt="A battle on a sunset beach among ruined columns: Nika, Scott and Ferris face hooded Imperial Seekers as a violet vortex with an eye opens among them, the airship Fool's Luck sailing behind.">
+          <figcaption><strong>Skybound Secrets.</strong> Nika, Scott and Ferris against the Empire's Seekers, with the Fool's Luck waiting off shore.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/battle_luna.jpg" width="1600" height="900" loading="lazy" alt="A battle in a marble courtyard under a great crystal dome: Nika and Darian face Empress Luna's red-robed Furies as a ring of fire flies.">
+          <figcaption><strong>The Empress's Showcase.</strong> Empress Luna and her Furies, under Lumina's crystal dome.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/battle_harbor.jpg" width="1600" height="900" loading="lazy" alt="A battle on a rain-slick quay at night, imperial airships and searchlights overhead: an old librarian stands alone against Emperor Helios and his Phoenix Guard as fire bursts among them.">
+          <figcaption><strong>The Guild Raid.</strong> One old librarian against the Emperor and his Phoenix Guard, the fleet's searchlights overhead.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/battle_valley.jpg" width="1600" height="900" loading="lazy" alt="A battle in a flowering mountain valley at dusk: Nika, Scott and Elian trade fire with Conductor-Major Ironheart and his Phoenix Guard.">
+          <figcaption><strong>The Forgotten Valley.</strong> The last stand against Conductor-Major Ironheart.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>The sky is full of whales</h2>
+      <p class="lead">Skywhales cross both realms, one for every kind of song. Some watch. Some come down to fight. From your second playthrough on, you can win one for your own company.</p>
+      <div class="gallery whales">
+        <img class="big" src="img/whale_crimson.png" width="557" height="320" loading="lazy" alt="A great crimson skywhale, its hide ridged like coral, white crystals along its back and roots trailing beneath.">
+        <img src="img/skywhale_gold.png" loading="lazy" alt="A winged skywhale of gold.">
+        <img src="img/skywhale_fire.png" loading="lazy" alt="A winged skywhale of fire.">
+        <img src="img/skywhale_water.png" loading="lazy" alt="A winged skywhale of water.">
+        <img src="img/skywhale_air.png" loading="lazy" alt="A winged skywhale of air, a winged narwhal.">
+        <img src="img/skywhale_song.png" loading="lazy" alt="A winged skywhale of song.">
+        <img src="img/skywhale_nature.png" loading="lazy" alt="A winged skywhale of nature.">
+        <img src="img/skywhale_mind.png" loading="lazy" alt="A winged skywhale of mind.">
+        <img src="img/skywhale_void.png" loading="lazy" alt="A winged skywhale of void.">
+        <img src="img/skywhale_earth.png" loading="lazy" alt="A winged skywhale of earth.">
+        <img class="big" src="img/whale_elder.png" width="539" height="320" loading="lazy" alt="An earth elder in flight: a vast stone-backed skywhale.">
+      </div>
+      <div class="shots">
+        <figure class="wide">
+          <img src="img/battle_whales.jpg" width="1600" height="900" loading="lazy" alt="A battle on a sunset beach against a pod of violet mind skywhales with eyes on their wings, as Ferris spins a wheel of fire.">
+          <figcaption><strong>A pod comes down.</strong> Mind skywhales settle on the beach in the middle of a chapter. Knock one out and its kind joins your Stable.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>And the Empire's fleet</h2>
+      <p class="lead">Emperor Helios hunts by air. His dreadnoughts, patrol ships and cage ships stand off over the chapters, and at night their searchlights sweep the streets.</p>
+      <div class="gallery ships">
+        <img src="img/ship_emperor_flagship.png" width="429" height="260" loading="lazy" alt="The Emperor's flagship: a red and gold airship shaped like a great fish, a blazing sun on its hull.">
+        <img src="img/ship_helios_dreadnought.png" width="460" height="260" loading="lazy" alt="The Emperor's dreadnought: crimson and gold, twin lion heads at the prow.">
+        <img src="img/ship_ironheart.png" width="457" height="260" loading="lazy" alt="Conductor-Major Ironheart's airship: dark blue iron with a raven's head at the prow.">
+        <img src="img/ship_phoenix.png" width="456" height="260" loading="lazy" alt="A Phoenix dirigible: crimson and silver with a silver phoenix figurehead.">
+        <img src="img/ship_imperial_patrol.png" width="437" height="260" loading="lazy" alt="An imperial patrol dirigible: dark blue and iron with searchlights under its hull.">
+      </div>
+      <div class="shots">
+        <figure>
+          <img src="img/board_fleet.jpg" width="1600" height="900" loading="lazy" alt="The Emperor's sun-crested airships moored at Stormspire's pale stone docks in the rain, with companies standing on the quay.">
+          <figcaption><strong>The fleet at Stormspire.</strong> Chapter one opens with the Emperor's ships already at the docks.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/board_harbor.jpg" width="1600" height="900" loading="lazy" alt="A town board at night in heavy rain, lamps glowing in its alleys, a dreadnought overhead sweeping the streets with searchlights.">
+          <figcaption><strong>Chronos Harbor by night.</strong> Lamps in the alleys, rain on the roofs and a dreadnought's searchlights sweeping the streets.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Compose your own magic</h2>
+      <p class="lead">Every spell is a song you build in the grimoire: choose its shape, how much voice goes into it, and up to two elements to sing into it. Sing from creation or from negation. Push a singer past their Strain and the power takes over.</p>
+      <div class="shots">
+        <figure class="wide">
+          <img src="img/grimoire.jpg" width="1600" height="900" loading="lazy" alt="The grimoire screen: a brass wheel of the elements Fire, Air, Mind, Water, Earth and Space round an hourglass of Time, a second wheel of blended elements, a silver wheel of musical shapes and dynamics, and a parchment page describing the song Space Rest.">
+          <figcaption><strong>The grimoire.</strong> The wheel of elements, the wheel of blends and the wheel of shapes. This one is Space Rest: music's silence, sung at a foe.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>A cast of dozens</h2>
+      <p class="lead">Singers, drummers, sky captains, librarians, emperors and furies. Everyone has two classes, a trade and their own portrait, and from your second playthrough the whole roster is yours to send anywhere.</p>
+      <div class="shots">
+        <figure class="wide">
+          <img class="keep" src="img/cast.jpg" width="1600" height="640" loading="lazy" alt="Forty framed portraits of the game's heroes and villains.">
+          <figcaption><strong>Heroes and villains.</strong> The crew of the Fool's Luck, the Valorians, the Guild and the Empire's court.</figcaption>
+        </figure>
+      </div>
+      <h3 class="sub">And the keepers of the watering holes</h3>
+      <p class="lead">Every region has a fishing spot, and every fishing spot has a master with a rod, an opinion and a rumour or two.</p>
+      <div class="masters">
+        <img src="img/master_barnaby.png" width="231" height="300" loading="lazy" alt="Old Barnaby Tuck, an old fisherman in a sou'wester with a wicker creel.">
+        <img src="img/master_odessa.png" width="275" height="300" loading="lazy" alt="Odessa Marlowe, a woman in a teal coat with a compass and rod.">
+        <img src="img/master_halloran.png" width="234" height="300" loading="lazy" alt="Widow Halloran, a grey-braided woman in a blue coat with a lantern.">
+        <img src="img/master_pip.png" width="152" height="300" loading="lazy" alt="Pip Arkwright, a boy in a flat cap with a brass backpack.">
+        <img src="img/master_jun.png" width="229" height="300" loading="lazy" alt="Jun Castellan, a goggled angler in a coat hung with lures.">
+        <img src="img/master_marisol.png" width="259" height="300" loading="lazy" alt="Marisol of the Shallows, a scaled sea-woman with a trident rod.">
+        <img src="img/master_nix.png" width="205" height="300" loading="lazy" alt="Mother Nix, a witch in a wide hat with a lantern staff.">
+        <img src="img/master_tomas.png" width="261" height="300" loading="lazy" alt="Tomas Whiskerby, a cat-eared man checking a pocket watch.">
+      </div>
+    </div>
+  </section>
+
+  <section id="beasts">
+    <div class="wrap">
+      <h2>Beasts of two natures</h2>
+      <p class="lead">Every wild creature in the realms is two animals in one: the Bull-Lion, the Owl-Squirrel, the Shark-Rhino. Hunt them, tame them and stable them, then send them out beside your singers, up to six to a company.</p>
+      <div class="shots">
+        <figure class="wide">
+          <img class="keep" src="img/beasts.jpg" width="1600" height="800" loading="lazy" alt="A wall of 44 framed beast portraits, each a blend of two animals.">
+          <figcaption><strong>The menagerie.</strong> 44 kinds roam the maps, each with its own art, loot and place in the kitchen.</figcaption>
+        </figure>
+        <figure class="wide">
+          <img class="keep" src="img/beast_forms.jpg" width="960" height="192" loading="lazy" alt="The Bull-Lion in five forms: its plain form, a fire form, a light form, an Elder and an Eldritch.">
+          <figcaption><strong>One kind, many forms.</strong> The same beast can come in any element, as a great Elder, or as something Eldritch that should not have woken.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="chefs">
+    <div class="wrap">
+      <h2>Cook what you catch</h2>
+      <p class="lead">Food is half the journey. Every region has a master chef of its own element, and what you hunt, fish and gather on the road goes into the pot. Take a chef's hunts from the notice board to learn their region's cuisine dish by dish, then face the timed hunt into their culinary dungeon to master it.</p>
+      <div class="shots">
+        <figure class="wide">
+          <img class="keep" src="img/chefs.jpg" width="1728" height="192" loading="lazy" alt="Nine framed portraits: the eight master chefs and Torikina, the wilderness chef.">
+          <figcaption><strong>The master chefs.</strong> Jayson Galewright, Anne Rootwell, Patrick Ashvale, Harry Tidewell and Maria Stonehearth keep the five regions; George Everhour, Ilse Moonwhisk and Corin Starhallow cook on the Night Map; and Torikina keeps the fire wherever you make camp.</figcaption>
+        </figure>
+        <figure class="wide">
+          <img class="keep" src="img/food.jpg" width="1600" height="700" loading="lazy" alt="A wall of 98 painted food icons: dishes, cuts of meat, fish, herbs, spices and rare ingredients.">
+          <figcaption><strong>The pantry.</strong> 46 dishes from 51 ingredients, each with its own icon, from trail rations to a region's signature plate.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="weather">
+    <div class="wrap">
+      <h2>Weather you fight in</h2>
+      <p class="lead">The sky is part of the fight. Weather falls on the board tile by tile, each part of a map can have its own, and it changes what your songs can do: a storm makes Lightning stronger and Fire weaker, pollen makes the wood drowsy, and a burning forest is exactly as bad as it looks.</p>
+      <div class="shots">
+        <figure class="wide">
+          <img src="img/weather_ch2.jpg" width="1600" height="900" loading="lazy" alt="An island board in three levels: clear sun on the ruins at the top, golden pollen drifting over the jungle, and a thunderstorm over the beach and the sea, with airships and a crimson skywhale around it.">
+          <figcaption><strong>Three skies on one map.</strong> Clear over the dig, a pollen bloom in the jungle, and the Empire's storm coming in off the sea.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/weather_ch3.jpg" width="1600" height="900" loading="lazy" alt="A snowbound mountain board with cloud clinging to its edges and imperial airships passing in the mist.">
+          <figcaption><strong>The Echoing Peaks.</strong> Snow, cloud on the passes and patrol ships somewhere in it.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/weather_ch6.jpg" width="1600" height="900" loading="lazy" alt="A valley board with a wood on fire along one side, a mountain lake, and green miasma rising from the low ground, an imperial airship overhead.">
+          <figcaption><strong>The Forgotten Valley.</strong> The wood is burning, the low ground is thick with miasma, and Ironheart's ship is overhead.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>How it plays</h2>
+      <div class="features">
+        <div class="card"><h3>Companies, not single heroes</h3><p>Move squads across boards in three levels. When two meet, the fight plays out from the orders you gave each fighter.</p></div>
+        <div class="card"><h3>The sky matters</h3><p>Storms make Lightning stronger and Fire weaker. Fog, snow, sand, pollen, eclipses and three moons all change a fight.</p></div>
+        <div class="card"><h3>Beasts and pets</h3><p>Hunt, tame and stable the realm's creatures, each in elemental forms, and bring them into your companies.</p></div>
+        <div class="card"><h3>A world between chapters</h3><p>Travel living maps: dig for relics, fish the watering holes, delve dungeons and visit the circus airship when it moors.</p></div>
+        <div class="card"><h3>Play it again</h3><p>Each playthrough adds a layer: new sights, new rules and the whole roster unlocked.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="download" class="download">
+    <div class="wrap">
+      <h2>Play the alpha</h2>
+      <p class="lead">Dual Realms is in alpha: playable from start to finish of Book One, still growing, and free to try.</p>
+      <a class="button" href="#download">Downloads coming soon</a>
+      <div class="platforms">Version 0.1.8 alpha · Windows, macOS and Linux · about 1.8 GB</div>
+      <p class="note">Your saves carry over from one version to the next. Feedback is welcome and goes straight to the author.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Script and direction: George Foley, based on the Dual Worlds book saga.</p>
+    <p>Visual assets generated with Gemini and Grok, with help from Summer Engine. Music generated with Eleven Music by ElevenLabs. Built in the Godot Engine.</p>
+    <p>Fonts: Alagard by Hewett Tsoi; Pixelify Sans, Copyright 2021 The Pixelify Sans Project Authors, SIL Open Font License 1.1.</p>
+    <p>Copyright 2026 George Foley.</p>
+  </div>
+</footer>
+
+</body>
+</html>
