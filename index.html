@@ -83,6 +83,11 @@ figcaption strong { color: var(--ink); font-weight: normal; }
 h3.sub { margin-top: 2.2rem; font-size: 1.6rem; }
 figure img.keep { aspect-ratio: auto; }
 
+.music { position: fixed; top: 14px; right: 14px; z-index: 10; padding: 0.45rem 1rem; cursor: pointer;
+  font-family: "Alagard", Georgia, serif; font-size: 1.05rem; color: #1a1305; background: var(--brass);
+  border: 2px solid #fff1c7; border-radius: 6px; box-shadow: 0 3px 0 var(--brass-dim); }
+.music:hover, .music:focus-visible { background: #f2ca76; }
+
 .download { text-align: center; }
 .download .lead { margin: 0 auto 1rem; }
 .note { color: var(--ink-dim); font-size: 0.95rem; max-width: 40rem; margin: 1.2rem auto 0; }
@@ -92,6 +97,9 @@ footer p { margin-bottom: 0.5em; }
 </style>
 </head>
 <body>
+
+<button id="music" class="music" type="button" aria-pressed="false">Play the theme</button>
+<audio id="theme" src="audio/main_theme.mp3" loop preload="none"></audio>
 
 <header class="hero">
   <img src="img/hero.jpg" width="1919" height="1055" alt="Dual Realms: A Journey of the Fool's Luck. The silver ship Fool's Luck under full sail on open sea, a golden-haired figurehead at her prow, the title in gold across her sails.">
@@ -310,6 +318,25 @@ footer p { margin-bottom: 0.5em; }
     <p>Copyright 2026 George Foley.</p>
   </div>
 </footer>
+
+<script>
+(function () {
+  var button = document.getElementById("music");
+  var theme = document.getElementById("theme");
+  theme.volume = 0.6;
+  button.addEventListener("click", function () {
+    if (theme.paused) {
+      theme.play();
+      button.textContent = "Pause the music";
+      button.setAttribute("aria-pressed", "true");
+    } else {
+      theme.pause();
+      button.textContent = "Play the theme";
+      button.setAttribute("aria-pressed", "false");
+    }
+  });
+})();
+</script>
 
 </body>
 </html>
